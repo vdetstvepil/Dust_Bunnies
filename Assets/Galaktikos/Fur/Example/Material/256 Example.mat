@@ -93,7 +93,7 @@ Material:
     - _FurHeightCutoff: 1
     - _FurHeightCutoffChangeBase: 0
     - _FurHeightCutoffEnd: 1
-    - _FurHeightCutoffStart: 0.481
+    - _FurHeightCutoffStart: 0.447
     - _FurInset: 0
     - _FurLayerFade: 1
     - _FurLayerFadeChangeBase: 0
@@ -147,7 +147,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
-    - _FurColor: {r: 0.084905684, g: 0.084905684, b: 0.084905684, a: 1}
+    - _FurColor: {r: 0.9622642, g: 0.9622642, b: 0.9622642, a: 1}
     - _FurEmmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FurLayerFadeEnd: {r: 0.5283019, g: 0.5283019, b: 0.5283019, a: 1}
     - _FurLayerFadeStart: {r: 0.21698111, g: 0.21698111, b: 0.21698111, a: 1}
