@@ -144,7 +144,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
-    - _FurColor: {r: 1.0717734, g: 1.0717734, b: 1.0717734, a: 1}
+    - _FurColor: {r: 0.2564824, g: 0.2564824, b: 0.2564824, a: 1}
     - _FurEmmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FurLayerFadeEnd: {r: 1, g: 1, b: 1, a: 1}
     - _FurLayerFadeStart: {r: 0, g: 0, b: 0, a: 1}

@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: 50 Example
   m_Shader: {fileID: 4800000, guid: ac66599fb4fbde149a9059a801142c0a, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords:
   - _FURHEIGHTCUTOFF_ON
@@ -25,6 +27,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -88,6 +91,7 @@ Material:
     - _FurHeightCutoffChangeBase: 0
     - _FurHeightCutoffEnd: 0.85
     - _FurHeightCutoffStart: 0
+    - _FurInset: 0
     - _FurLayerFade: 1
     - _FurLayerFadeChangeBase: 0
     - _FurLayers: 1
@@ -138,12 +142,12 @@ Material:
     - _ZTest: 4
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
-    - _FurColor: {r: 1.0717734, g: 1.0717734, b: 1.0717734, a: 1}
+    - _FurColor: {r: 0.2429833, g: 0.2429833, b: 0.2429833, a: 1}
     - _FurEmmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FurLayerFadeEnd: {r: 1, g: 1, b: 1, a: 1}
-    - _FurLayerFadeStart: {r: 0, g: 0, b: 0, a: 1}
+    - _FurLayerFadeStart: {r: 0.5849056, g: 0.5849056, b: 0.5849056, a: 1}
     - _FurLightingDirectionalSpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _FurSpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 1, g: 1, b: 1, a: 1}
