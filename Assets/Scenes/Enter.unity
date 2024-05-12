@@ -1122,6 +1122,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 12071126, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 12071126, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0.5058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 12071126, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 0.13725491
+      objectReference: {fileID: 0}
+    - target: {fileID: 12071126, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0.39607847
+      objectReference: {fileID: 0}
+    - target: {fileID: 12071126, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0.7075472
+      objectReference: {fileID: 0}
+    - target: {fileID: 12071126, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 0.26366144
+      objectReference: {fileID: 0}
+    - target: {fileID: 12071126, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0.5753258
+      objectReference: {fileID: 0}
+    - target: {fileID: 12071126, guid: 7a135b1a2cb9c8f488d4dd00c55ab283, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
