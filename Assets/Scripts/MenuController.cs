@@ -3,42 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Valve.VR;
 
 
 public class MenuController : MonoBehaviour
 {
-    public GameObject settingsPanel; // Панель настроек
+    public GameObject settingsPanel;
     public GameObject startPanel;
 
-    // Метод для перехода на сцену "SampleScene"
+    // Переход на сцену "Enter"
     public void StartGame()
     {
-        // Показываем экран загрузки
-        //loadingScreen.SetActive(true);
-
-        // Выгружаем текущую сцену из памяти
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-        Destroy(GameObject.Find("Player"));
-
-        // Асинхронно загружаем сцену "Enter"
-        StartCoroutine(LoadSceneAsync("Enter"));
+        SceneController.SwitchScene("Enter");
     }
 
-    IEnumerator LoadSceneAsync(string sceneName)
-    {
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(sceneName);
-
-        // Пока сцена загружается, обновляем прогресс загрузки
-        while (!asyncLoad.isDone)
-        {
-            float progress = Mathf.Clamp01(asyncLoad.progress / 0.9f); // Прогресс загрузки от 0 до 1
-           // loadingBar.value = progress; // Обновляем значение прогресс-бара
-            yield return null;
-        }
-    }
-
-
-    // Метод для показа панели настроек
+    // Показ панели настроек
     public void ShowSettings()
     {
         if (settingsPanel != null)
@@ -48,7 +27,7 @@ public class MenuController : MonoBehaviour
         }
     }
 
-    // Метод для выхода из игры
+    // Выход из игры
     public void ExitGame()
     {
         Application.Quit();
