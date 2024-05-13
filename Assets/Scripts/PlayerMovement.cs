@@ -5,8 +5,11 @@ public class PlayerMovement : MonoBehaviour
 {
     public SteamVR_Input_Sources inputSource; // Источник ввода (левый или правый контроллер)
     public SteamVR_Action_Vector2 movementAction; // Действие для получения входных данных от джойстика
-    public float speed = 1.0f; // Скорость перемещения
+    public float maxSpeed = 1.0f; // Максимальная скорость перемещения
+    public float acceleration = 1.0f; // Ускорение
+    public float deceleration = 2.0f; // Замедление
     private Transform playerCamera; // Ссылка на камеру игрока
+    private Vector3 currentVelocity; // Текущая скорость перемещения
 
     private void Start()
     {
@@ -24,10 +27,20 @@ public class PlayerMovement : MonoBehaviour
         // Преобразуем вводные данные в вектор движения относительно направления взгляда
         Vector3 movement = cameraForward * movementInput.y + playerCamera.right * movementInput.x;
 
-        // Применяем скорость и время к вектору движения
-        movement = Vector3.ClampMagnitude(movement, 1) * speed * Time.deltaTime;
+        // Применяем максимальную скорость и время к вектору движения
+        movement = Vector3.ClampMagnitude(movement, 1) * maxSpeed * Time.deltaTime;
 
-        // Применяем перемещение к игроку
-        transform.position += movement;
+        // Применяем ускорение или замедление к текущей скорости в соответствии с вводом
+        if (movementInput.magnitude > 0)
+        {
+            currentVelocity = Vector3.Lerp(currentVelocity, movement, acceleration * Time.deltaTime);
+        }
+        else
+        {
+            currentVelocity = Vector3.Lerp(currentVelocity, Vector3.zero, deceleration * Time.deltaTime);
+        }
+
+        // Применяем скорость перемещения к игроку
+        transform.position += currentVelocity;
     }
 }
