@@ -14,14 +14,28 @@ public class SceneController : MonoBehaviour
 
         // Загружаем новую сцену асинхронно
         Instance.StartCoroutine(LoadSceneAsync(sceneName));
+
+        if (sceneName != "Start")
+        {
+            GameObject[] hands = GameObject.FindGameObjectsWithTag("HandsVR");
+
+            foreach (GameObject hand in hands)
+            {
+                LaserHand laserHand = hand.GetComponent<LaserHand>();
+
+                if (laserHand != null)
+                {
+                    laserHand.active = false;
+                    laserHand.thickness = 0;
+                }
+            }
+        }
     }
 
     // Асинхронная загрузка сцены
     private static IEnumerator LoadSceneAsync(string sceneName)
     { 
         yield return new WaitForSeconds(3f);
-
-        Destroy(GameObject.Find("Player"));
 
         SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
     }

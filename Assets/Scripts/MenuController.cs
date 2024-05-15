@@ -20,11 +20,15 @@ public class MenuController : MonoBehaviour
     // Показ панели настроек
     public void ShowSettings()
     {
-        if (settingsPanel != null)
-        {
-            settingsPanel.SetActive(true);
-            startPanel.SetActive(false);
-        }
+        settingsPanel.SetActive(true);
+        startPanel.SetActive(false);
+    }
+
+    // Выход из панели настроек
+    public void BackToMenu()
+    {
+        startPanel.SetActive(true);
+        settingsPanel.SetActive(false);
     }
 
     // Выход из игры
