@@ -129,6 +129,22 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Single SqueezeLeft
+        {
+            get
+            {
+                return SteamVR_Actions.default_SqueezeLeft;
+            }
+        }
+        
+        public virtual SteamVR_Action_Single SqueezeRight
+        {
+            get
+            {
+                return SteamVR_Actions.default_SqueezeRight;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get
