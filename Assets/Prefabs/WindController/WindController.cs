@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.XR.OpenXR.Input;
 using Valve.VR;
 
 public class WindController : MonoBehaviour
@@ -8,95 +7,56 @@ public class WindController : MonoBehaviour
     public GameObject rightController;
     public ParticleSystem windParticlesLeft;
     public ParticleSystem windParticlesRight;
-    public SteamVR_Action_Boolean grabPinchLeftAction; // Действие кнопки Grab Pinch для левой руки
-    public SteamVR_Action_Boolean grabPinchRightAction; // Действие кнопки Grab Pinch для правой руки
-    public float windForce; // Сила ветра
+    public SteamVR_Action_Single grabPinchLeftAction; // Действие силы нажатия Grab Pinch для левой руки
+    public SteamVR_Action_Single grabPinchRightAction; // Действие силы нажатия Grab Pinch для правой руки
+    public float maxWindForce; // Максимальная сила ветра
+    public float maxSpeedModifier; // Максимальный множитель скорости
 
-    void Update()
+    private void Update()
     {
         if (leftController != null && rightController != null)
         {
-            windParticlesLeft.transform.position = leftController.transform.position;
-            windParticlesLeft.transform.rotation = leftController.transform.rotation;
-            windParticlesRight.transform.position = rightController.transform.position;
-            windParticlesRight.transform.rotation = rightController.transform.rotation;
+            // Обновляем позиции и вращения систем частиц
+            UpdateParticleSystemPosition(windParticlesLeft, leftController);
+            UpdateParticleSystemPosition(windParticlesRight, rightController);
 
-            // Подписка на события нажатия/отпускания кнопок Grab Pinch для обеих рук
-            grabPinchLeftAction.AddOnChangeListener(OnGrabPinchLeftActionChange, SteamVR_Input_Sources.LeftHand);
-            grabPinchRightAction.AddOnChangeListener(OnGrabPinchRightActionChange, SteamVR_Input_Sources.RightHand);
-            //ApplyWindToSphere(leftController, windParticlesLeft); // Применить воздействие ветра к шару с левого контроллера
-            //ApplyWindToSphere(rightController, windParticlesRight); // Применить воздействие ветра к шару с правого контроллера
-
-        }
-    }
-    private void OnDestroy()
-    {
-        // Отписка от событий при уничтожении объекта
-        grabPinchLeftAction.RemoveOnChangeListener(OnGrabPinchLeftActionChange, SteamVR_Input_Sources.LeftHand);
-        grabPinchRightAction.RemoveOnChangeListener(OnGrabPinchRightActionChange, SteamVR_Input_Sources.RightHand);
-    }
-
-    private void OnGrabPinchLeftActionChange(SteamVR_Action_Boolean action, SteamVR_Input_Sources inputSource, bool newValue)
-    {
-        // Включение/выключение системы частиц для левой руки
-        if (newValue)
-        {
-            StartParticle(windParticlesLeft);
-        }
-        else
-        {
-            StopParticle(windParticlesLeft);
+            // Обновляем силу ветра и множитель скорости в зависимости от силы нажатия
+            UpdateWindForceAndSpeedModifier(windParticlesLeft, grabPinchLeftAction);
+            UpdateWindForceAndSpeedModifier(windParticlesRight, grabPinchRightAction);
         }
     }
 
-    private void OnGrabPinchRightActionChange(SteamVR_Action_Boolean action, SteamVR_Input_Sources inputSource, bool newValue)
+    private void UpdateParticleSystemPosition(ParticleSystem particleSystem, GameObject controller)
     {
-        // Включение/выключение системы частиц для правой руки
-        if (newValue)
-        {
-            StartParticle(windParticlesRight);
-        }
-        else
-        {
-            StopParticle(windParticlesRight);
-        }
+        particleSystem.transform.position = controller.transform.position;
+        particleSystem.transform.rotation = controller.transform.rotation;
     }
 
-    private void StartParticle(ParticleSystem particleSystem)
+    private void UpdateWindForceAndSpeedModifier(ParticleSystem particleSystem, SteamVR_Action_Single grabPinchAction)
     {
-        // Включение системы частиц
-        particleSystem.Play();
-    }
+        float pinchValue = grabPinchAction.GetAxis(SteamVR_Input_Sources.Any);
 
-    private void StopParticle(ParticleSystem particleSystem)
-    {
-        // Выключение системы частиц
-        particleSystem.Stop();
-    }
+        // Обновляем множитель скорости частиц
+        var velocityOverLifetime = particleSystem.velocityOverLifetime;
+        velocityOverLifetime.speedModifier = pinchValue * maxSpeedModifier;
 
+        // Обновляем силу ветра
+        var collision = particleSystem.collision;
+       // collision.colliderForce = pinchValue * maxWindForce;
 
-    void ApplyWindToSphere(GameObject controller, ParticleSystem windParticles)
-    {
-        if (windParticles.isPlaying)
+        // Включаем/выключаем систему частиц в зависимости от силы нажатия
+        if (pinchValue > 0)
         {
-            Vector3 windDirection = controller.transform.forward; // Направление ветра соответствует направлению контроллера
-            Vector3 windPosition = controller.transform.position;
-
-           
-
-            Collider[] colliders = Physics.OverlapSphere(windPosition, 2f); // Обнаружение объектов в радиусе ветра
-            foreach (Collider collider in colliders)
+            if (!particleSystem.isPlaying)
             {
-                Rigidbody rb = collider.GetComponent<Rigidbody>();
-                if (rb != null)
-                {
-                    Vector3 directionToCollider = collider.transform.position - windPosition;
-                    float dotProduct = Vector3.Dot(windDirection, directionToCollider.normalized);
-                    if (dotProduct > 0) // Проверка, что объект находится впереди контроллера
-                    {
-                        rb.AddForce(windDirection * windForce, ForceMode.Acceleration); // Применить силу ветра к объекту
-                    }
-                }
+                particleSystem.Play();
+            }
+        }
+        else
+        {
+            if (particleSystem.isPlaying)
+            {
+                particleSystem.Stop();
             }
         }
     }

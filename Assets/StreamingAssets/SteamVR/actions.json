@@ -62,6 +62,16 @@
       "type": "vector2"
     },
     {
+      "name": "/actions/default/in/SqueezeLeft",
+      "type": "vector1",
+      "requirement": "suggested"
+    },
+    {
+      "name": "/actions/default/in/SqueezeRight",
+      "type": "vector1",
+      "requirement": "suggested"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
