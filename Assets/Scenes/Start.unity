@@ -1396,6 +1396,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScenePause
       objectReference: {fileID: 0}
+    - target: {fileID: 3368243116557429415, guid: 0d727aea02473954c8a8b3b47b2f9a3e, type: 3}
+      propertyPath: deadZoneRadius
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 4086034885551019667, guid: 0d727aea02473954c8a8b3b47b2f9a3e, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
