@@ -1,8 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Valve.VR;
+
 
 public class PauseController : MonoBehaviour
 {
@@ -25,6 +27,7 @@ public class PauseController : MonoBehaviour
 
     void Start()
     {
+       
         pauseCanvas.SetActive(false);
 
         // Получение компонентов Image из кнопок
@@ -32,7 +35,7 @@ public class PauseController : MonoBehaviour
         buttonComponents = new Button[buttons.Length];
         for (int i = 0; i < buttons.Length; i++)
         {
-            buttonImages[i] = buttons[i].GetComponent<Image>();
+            buttonImages[i] = buttons[i].GetComponent<Image>(); 
             buttonComponents[i] = buttons[i].GetComponent<Button>();
         }
     }
@@ -48,7 +51,7 @@ public class PauseController : MonoBehaviour
 
             pauseCanvas.SetActive(true);
             Debug.Log("pause pushed");
-            StartCoroutine(SmoothTimeScaleAndFade(0, 0.5f));
+            Time.timeScale = 0;
         }
 
         if (Time.timeScale == 0)
@@ -69,7 +72,8 @@ public class PauseController : MonoBehaviour
 
     int DetermineSelection(Vector2 touchPosition)
     {
-        if (touchPosition.magnitude < deadZoneRadius)
+        if (touchPosition.magnitude < deadZoneRadius) 
+            // Если палец находится в мертвой зоне, вернуть -1
         {
             return -1;
         }
@@ -92,10 +96,7 @@ public class PauseController : MonoBehaviour
             }
 
             currentSelection = newSelection;
-            if (currentSelection != -1)
-            {
-                buttonImages[currentSelection].sprite = selectedSprites[currentSelection];
-            }
+            buttonImages[currentSelection].sprite = selectedSprites[currentSelection];
         }
     }
 
@@ -110,54 +111,34 @@ public class PauseController : MonoBehaviour
 
     void OnButtonSelected(int index)
     {
+        // Выполните действие, связанное с кнопкой index
         if (index != -1)
-        {
             buttonComponents[index].onClick.Invoke();
-        }
+        Debug.Log(index);
     }
+
 
     // Нажатие на кнопку "Продолжить игру"
     public void ContinueGame()
     {
-        StartCoroutine(SmoothTimeScale(1, 0.5f));
+        Time.timeScale = 1;
         pauseCanvas.SetActive(false);
     }
 
     // Показ панели настроек
     public void RestartGame()
     {
-        // Ваша логика перезапуска игры
+        Time.timeScale = 1;
+        pauseCanvas.SetActive(false);
+        SceneController.SwitchScene(SceneManager.GetActiveScene().name);
     }
 
     // Выход в меню
     public void ExitGame()
     {
-        StartCoroutine(SmoothTimeScale(1, 0.5f));
+        Time.timeScale = 1;
         pauseCanvas.SetActive(false);
         SceneController.SwitchScene("Enter");
-    }
 
-    // Корутин для плавной смены Time.timeScale
-    IEnumerator SmoothTimeScale(float targetTimeScale, float duration)
-    {
-        float start = Time.timeScale;
-        float t = 0;
-        while (t < duration)
-        {
-            t += Time.unscaledDeltaTime;
-            Time.timeScale = Mathf.Lerp(start, targetTimeScale, t / duration);
-            yield return null;
-        }
-        Time.timeScale = targetTimeScale;
-    }
-
-    // Корутин для плавной смены Time.timeScale и мигания экрана
-    IEnumerator SmoothTimeScaleAndFade(float targetTimeScale, float duration)
-    {
-        SteamVR_Fade.Start(Color.black * 0.2f, 0.25f); // Затемнение экрана
-        yield return new WaitForSecondsRealtime(0.25f); // Ожидание 0.5 секунд
-        SteamVR_Fade.Start(Color.clear, 0.25f); // Восстановление прозрачности
-
-        yield return SmoothTimeScale(targetTimeScale, duration); // Плавная смена Time.timeScale
     }
 }
