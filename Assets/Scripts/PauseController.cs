@@ -45,9 +45,9 @@ public class PauseController : MonoBehaviour
         // Проверяем, нажата ли кнопка меню на контроллере
         if (menuAction.stateDown)
         {
-            //if (SceneManager.GetActiveScene().name == "Start" 
-            //    || SceneManager.GetActiveScene().name == "Enter")
-            //    return;
+            if (SceneManager.GetActiveScene().name == "Start"
+                || SceneManager.GetActiveScene().name == "Enter")
+                return;
 
             pauseCanvas.SetActive(true);
             Debug.Log("pause pushed");
