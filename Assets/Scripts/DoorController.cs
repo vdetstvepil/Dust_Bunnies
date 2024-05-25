@@ -34,13 +34,13 @@ public class DoorController : MonoBehaviour
         switch (chosenDoor)
         {
             case "Kitchen":
-                SceneController.SwitchScene("SampleScene");
+                SceneController.SwitchScene("Kitchen");
                 break;
             case "LivingRoom":
-                SceneController.SwitchScene("gostinnaya");
+                SceneController.SwitchScene("LivingRoom");
                 break;
             case "KidRoom":
-                SceneController.SwitchScene("Detskaya");
+                SceneController.SwitchScene("KidRoom");
                 break;
         }
         
