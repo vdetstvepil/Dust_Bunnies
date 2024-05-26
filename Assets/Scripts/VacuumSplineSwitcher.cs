@@ -1,18 +1,16 @@
 using Dreamteck.Splines;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class VacuumSplineSwitcher : MonoBehaviour
 {
     private SplineFollower _follower;
 
-    // Списки траекторий
-    public List<SplineComputer> loopedSplines;
-    public List<SplineComputer> linearSplines;
-
-    void Start()
-    {
+    void Start() 
+    { 
         _follower = GetComponent<SplineFollower>();
         _follower.onNode += OnNodePassed;
     }
@@ -27,32 +25,13 @@ public class VacuumSplineSwitcher : MonoBehaviour
         Debug.Log(nodePercent);
 
         Dreamteck.Splines.Node.Connection[] connections = nodeConnection.node.GetConnections();
-        SplineComputer currentSpline = _follower.spline;
-
-        // Проверка, является ли текущая траектория линейной
-        if (linearSplines.Contains(currentSpline))
-        {
-            // Переход на закольцованную траекторию
-            foreach (var connection in connections)
-            {
-                if (loopedSplines.Contains(connection.spline))
-                {
-                    _follower.spline = connection.spline;
-                    double newNodePercent = (double)connection.pointIndex / (connection.spline.pointCount - 1);
-                    double newPercent = connection.spline.Travel(newNodePercent, distancePastNode, _follower.direction);
-                    _follower.SetPercent(newPercent);
-                    return;
-                }
-            }
-        }
-        else
-        {
-            // Случайный переход на любую траекторию
-            int rnd = Random.Range(0, connections.Length);
-            _follower.spline = connections[rnd].spline;
-            double newNodePercent = (double)connections[rnd].pointIndex / (connections[rnd].spline.pointCount - 1);
-            double newPercent = connections[rnd].spline.Travel(newNodePercent, distancePastNode, _follower.direction);
-            _follower.SetPercent(newPercent);
-        }
+        int rnd = Random.Range(0, connections.Length);
+        _follower.spline = connections[rnd].spline;
+        double newNodePercent = (double)connections[rnd].pointIndex / (connections[rnd].spline.pointCount - 1);
+        double newPercent = connections[rnd].spline.Travel(newNodePercent, distancePastNode, _follower.direction);
+        _follower.SetPercent(newPercent);
     }
+
+
+    
 }
