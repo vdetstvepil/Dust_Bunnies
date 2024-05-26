@@ -18,7 +18,7 @@ public class BunnyNavigation : MonoBehaviour
     void Update()
     {
         // Найти объект Bunny в сцене на каждом кадре
-        bunny = GameObject.Find("Bunny");
+        bunny = GameObject.Find("low.clump");
 
         // Проверяем наличие объекта Bunny
         if (bunny != null)
