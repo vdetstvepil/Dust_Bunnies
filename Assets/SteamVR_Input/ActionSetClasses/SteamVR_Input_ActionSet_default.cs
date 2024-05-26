@@ -145,6 +145,22 @@ namespace Valve.VR
             }
         }
         
+        public virtual SteamVR_Action_Boolean PauseButton
+        {
+            get
+            {
+                return SteamVR_Actions.default_PauseButton;
+            }
+        }
+        
+        public virtual SteamVR_Action_Boolean TouchpadTouch
+        {
+            get
+            {
+                return SteamVR_Actions.default_TouchpadTouch;
+            }
+        }
+        
         public virtual SteamVR_Action_Vibration Haptic
         {
             get

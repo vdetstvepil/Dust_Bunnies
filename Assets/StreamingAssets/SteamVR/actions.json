@@ -72,6 +72,14 @@
       "requirement": "suggested"
     },
     {
+      "name": "/actions/default/in/PauseButton",
+      "type": "boolean"
+    },
+    {
+      "name": "/actions/default/in/TouchpadTouch",
+      "type": "boolean"
+    },
+    {
       "name": "/actions/default/out/Haptic",
       "type": "vibration"
     },
@@ -108,7 +116,7 @@
   "action_sets": [
     {
       "name": "/actions/default",
-      "usage": "single"
+      "usage": "leftright"
     },
     {
       "name": "/actions/platformer",

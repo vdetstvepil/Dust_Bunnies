@@ -14,7 +14,7 @@ public class MenuController : MonoBehaviour
     // Переход на сцену "Enter"
     public void StartGame()
     {
-        SceneController.SwitchScene("Enter");
+        SceneController.SwitchScene("Hall");
     }
 
     // Показ панели настроек
