@@ -21,30 +21,42 @@ public class test_travel_vacuum : MonoBehaviour
     private void OnNode(List<SplineTracer.NodeConnection> passed)
     {
         SplineTracer.NodeConnection nodeConnection = passed[0];
+        Debug.Log("=======================");
         Debug.Log("point=" + (double)nodeConnection.point);
         double nodePercent = (double)nodeConnection.point / (_follower.spline.pointCount - 1); // процент пути на узле
         double followerPercent = _follower.result.percent; // процент прохождения пылесосом пути
+        Debug.Log("nodepercent=" + nodePercent);
+
+        Debug.Log("followerPercent=" + followerPercent);
         float distancePastNode = _follower.spline.CalculateLength(nodePercent, followerPercent); // разница в процентах между узлом и пылесосом
+        Debug.Log("distancePastNode=" + distancePastNode);
+
 
         Node.Connection[] connections = nodeConnection.node.GetConnections();
         int rnd = Random.Range(0, connections.Length);
        
         double newNodePercent = (double)connections[rnd].pointIndex / (connections[rnd].spline.pointCount - 1); // процент пути на новом узле
         Debug.Log("pointnew=" + (double)connections[rnd].pointIndex);
+        if (connections[rnd].spline == _follower.spline)
+            return;
 
         double newPercent = connections[rnd].spline.Travel(newNodePercent, distancePastNode, _follower.direction);
+        Debug.Log("direction=" + _follower.direction);
+        Debug.Log("newpercent=" + newPercent);
+        Debug.Log("random=" + rnd);
 
-        _follower.RebuildImmediate();
+        //_follower.RebuildImmediate();
         _follower.spline = connections[rnd].spline;
-        _follower.RebuildImmediate();
+        //_follower.RebuildImmediate();
         _follower.SetPercent(newPercent);
         _follower.RebuildImmediate();
 
+        //_follower.SetPercent(newPercent);
+        //_follower.spline = connections[rnd].spline;
 
-
-        /*_follower.enabled = false;
-        Node.Connection connection = connections[rnd];
-        StartCoroutine(SetPercentAfterDelay(newPercent, connection));*/
+        /* _follower.enabled = false;
+         Node.Connection connection = connections[rnd];
+         StartCoroutine(SetPercentAfterDelay(newPercent, connection));*/
 
 
 

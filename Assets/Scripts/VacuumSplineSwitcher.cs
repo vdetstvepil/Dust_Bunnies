@@ -16,17 +16,18 @@ public class VacuumSplineSwitcher : MonoBehaviour
     private void OnNode(List<SplineTracer.NodeConnection> passed)
     {
         SplineTracer.NodeConnection nodeConnection = passed[0];
-        //Debug.Log("point=" + (double)nodeConnection.point);
-        double nodePercent = (double)nodeConnection.point / (_follower.spline.pointCount - 1);
-        double followerPercent = _follower.result.percent;
-        float distancePastNode = _follower.spline.CalculateLength(nodePercent, followerPercent);
+        double nodePercent = (double)nodeConnection.point / (_follower.spline.pointCount - 1); // процент пути на узле
+        double followerPercent = _follower.result.percent; // процент прохождения пылесосом пути
+        float distancePastNode = _follower.spline.CalculateLength(nodePercent, followerPercent); // разница в процентах между узлом и пылесосом
 
         Node.Connection[] connections = nodeConnection.node.GetConnections();
         int rnd = Random.Range(0, connections.Length);
-        _follower.spline = connections[rnd].spline;
-        double newNodePercent = (double)connections[rnd].pointIndex / (connections[rnd].spline.pointCount - 1);
+        double newNodePercent = (double)connections[rnd].pointIndex / (connections[rnd].spline.pointCount - 1); // процент пути на новом узле
         double newPercent = connections[rnd].spline.Travel(newNodePercent, distancePastNode, _follower.direction);
-        //_follower.SetPercent(newPercent);
+        _follower.spline = connections[rnd].spline;
+        _follower.SetPercent(newPercent);
+
+        _follower.RebuildImmediate();
     }
 
 
