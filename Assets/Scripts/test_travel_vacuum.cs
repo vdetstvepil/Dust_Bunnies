@@ -7,108 +7,91 @@ using UnityEngine;
 
 public class test_travel_vacuum : MonoBehaviour
 {
-    private SplineFollower _follower;
+    SplineFollower tracer;
 
-    void Start()
+    private void Awake()
     {
-        _follower = GetComponent<SplineFollower>();
-        _follower.onNode += OnNode;
+        tracer = GetComponent<SplineFollower>();
     }
-    private void Update()
+
+    private void OnEnable()
     {
+        tracer.onNode += OnNode; //onNode is called every time the tracer passes by a Node
+    }
+
+    private void OnDisable()
+    {
+        tracer.onNode -= OnNode;
     }
 
     private void OnNode(List<SplineTracer.NodeConnection> passed)
     {
-        SplineTracer.NodeConnection nodeConnection = passed[0];
-        Debug.Log("=======================");
-        Debug.Log("point=" + (double)nodeConnection.point);
-        double nodePercent = (double)nodeConnection.point / (_follower.spline.pointCount - 1); // процент пути на узле
-        double followerPercent = _follower.result.percent; // процент прохождения пылесосом пути
-        Debug.Log("nodepercent=" + nodePercent);
+        //plineTracer.NodeConnection holds information about the point index and provides a direct reference to the Node
+        //a list of Node connections is passed in case the tracer has moved over several points in the last frame
+        //this happens very rarely in particular cases where points are very close to each other and the tracer moves very fast
 
-        Debug.Log("followerPercent=" + followerPercent);
-        float distancePastNode = _follower.spline.CalculateLength(nodePercent, followerPercent); // разница в процентах между узлом и пылесосом
-        Debug.Log("distancePastNode=" + distancePastNode);
+        Debug.Log("Reached node " + passed[0].node.name + " connected at point " + passed[0].point);
 
+        //Get all available connected splines
 
-        Node.Connection[] connections = nodeConnection.node.GetConnections();
-        int rnd = Random.Range(0, connections.Length);
-       
-        double newNodePercent = (double)connections[rnd].pointIndex / (connections[rnd].spline.pointCount - 1); // процент пути на новом узле
-        Debug.Log("pointnew=" + (double)connections[rnd].pointIndex);
-        if (connections[rnd].spline == _follower.spline)
-            return;
+        Node.Connection[] connections = passed[0].node.GetConnections();
 
-        double newPercent = connections[rnd].spline.Travel(newNodePercent, distancePastNode, _follower.direction);
-        Debug.Log("direction=" + _follower.direction);
-        Debug.Log("newpercent=" + newPercent);
-        Debug.Log("random=" + rnd);
+        //If this node does not have other connected splines, skip everything - there is no junction
 
-        //_follower.RebuildImmediate();
-        _follower.spline = connections[rnd].spline;
-        //_follower.RebuildImmediate();
-        _follower.SetPercent(newPercent);
-        _follower.RebuildImmediate();
+        if (connections.Length == 1) return;
 
-        //_follower.SetPercent(newPercent);
-        //_follower.spline = connections[rnd].spline;
+        //get the connected splines and find the index of the tracer's current spline
 
-        /* _follower.enabled = false;
-         Node.Connection connection = connections[rnd];
-         StartCoroutine(SetPercentAfterDelay(newPercent, connection));*/
+        int currentConnection = 0;
 
+        for (int i = 0; i < connections.Length; i++)
+        {
+            if (connections[i].spline == tracer.spline && connections[i].pointIndex == passed[0].point)
+            {
+                currentConnection = i;
 
+                break;
+            }
+        }
 
+        //Choose a random connection to use that is not the current one
+        //This part can be replaced with any other Junction-picking logic (see TrainEngine.cs in Examples)
+        int newConnection = Random.Range(0, connections.Length);
 
+        //If the random index corrensponds to the current connection, change it so that it points to another connection
+        if (newConnection == currentConnection)
+        {
+            newConnection++;
 
+            if (newConnection >= connections.Length) newConnection = 0;
+        }
+
+        //A good method to use which takes into account spline directions and travel distances
+        //and adds compensation so that no twitching occurs
+
+        SwitchSpline(connections[currentConnection], connections[newConnection]);
     }
 
-  
-
-    /*private IEnumerator SetPercentAfterDelay(double newPercent, Node.Connection connection)
+    void SwitchSpline(Node.Connection from, Node.Connection to)
     {
-        yield return new WaitForSeconds(1.0f);
-        _follower.SetPercent(newPercent);
-        _follower.spline = connection.spline;
-        yield return new WaitForSeconds(1.0f);
-        _follower.enabled = true;
+        //See how much units we have travelled past that Node in the last frame
+        float excessDistance = tracer.spline.CalculateLength(tracer.spline.GetPointPercent(from.pointIndex), tracer.UnclipPercent(tracer.result.percent));
 
-    }*/
+        //Set the spline to the tracer
+        tracer.spline = to.spline;
+        tracer.RebuildImmediate();
 
-    /*
-     * 
-     * 
-        SplineTracer.NodeConnection nodeConnection = passed[0];
-        double nodePercent = (double)nodeConnection.point / (_follower.spline.pointCount - 1);
-        double followerPercent = _follower.result.percent;
-        float distancePastNode = _follower.spline.CalculateLength(nodePercent, followerPercent);    
+        //Get the location of the junction point in percent along the new spline
+        double startpercent = tracer.ClipPercent(to.spline.GetPointPercent(to.pointIndex));
 
-        Node.Connection[] connections = nodeConnection.node.GetConnections();
-        int rnd = Random.Range(0,connections.Length);
-        _follower.spline = connections[rnd].spline;
-        double newNodePercent = (double)connections[rnd].pointIndex / (connections[rnd].spline.pointCount - 1);
-        double newPercent = connections[rnd].spline.Travel(newNodePercent, distancePastNode, _follower.direction);
-        _follower.SetPercent(newPercent);
-     */
+        if (Vector3.Dot(from.spline.Evaluate(from.pointIndex).forward, to.spline.Evaluate(to.pointIndex).forward) < 0f)
+        {
+            if (tracer.direction == Spline.Direction.Forward) tracer.direction = Spline.Direction.Backward;
+            else tracer.direction = Spline.Direction.Forward;
+        }
 
+        //Position the tracer at the new location and travel excessDistance along the new spline
 
-    /*
-        SplineTracer.NodeConnection nodeConnection = passed[0];
-        Debug.Log(nodeConnection.node.name + " at point" + nodeConnection.point);
-        double nodePercent = (double)nodeConnection.point / (_follower.spline.pointCount - 1);
-        double followerPercent = _follower.UnclipPercent(_follower.result.percent);
-        float distancePastNode = _follower.spline.CalculateLength(nodePercent, followerPercent);
-        Debug.Log(nodePercent);
-
-        Dreamteck.Splines.Node.Connection[] connections = nodeConnection.node.GetConnections();
-        int rnd = Random.Range(0, connections.Length);
-        _follower.spline = connections[rnd].spline;
-        double newNodePercent = (double)connections[rnd].pointIndex / (connections[rnd].spline.pointCount - 1);
-        double newPercent = connections[rnd].spline.Travel(newNodePercent, distancePastNode, _follower.direction);
-        _follower.SetPercent(newPercent);
-    */
-
-
-
+        tracer.SetPercent(tracer.Travel(startpercent, excessDistance, tracer.direction));
+    }
 }
