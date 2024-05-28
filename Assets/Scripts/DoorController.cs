@@ -35,6 +35,7 @@ public class DoorController : MonoBehaviour
         {
             case "Kitchen":
                 SceneController.SwitchScene("Kitchen");
+                GameKitchenModeManager.Instance.SetGameMode(GameKitchenModeManager.GameMode.Start);
                 break;
             case "LivingRoom":
                 SceneController.SwitchScene("LivingRoom");

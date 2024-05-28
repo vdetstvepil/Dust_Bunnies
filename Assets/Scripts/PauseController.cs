@@ -130,7 +130,12 @@ public class PauseController : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseCanvas.SetActive(false);
-        SceneController.SwitchScene(SceneManager.GetActiveScene().name);
+        if (SceneManager.GetActiveScene().name == "Kitchen")
+        {
+            SceneController.SwitchScene("Kitchen");
+            GameKitchenModeManager.Instance.SetGameMode(GameKitchenModeManager.GameMode.Start);
+        }
+        else SceneController.SwitchScene(SceneManager.GetActiveScene().name);
     }
 
     // Выход в меню

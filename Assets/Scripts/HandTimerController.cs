@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class HandTimerController : MonoBehaviour
 {
@@ -45,6 +46,8 @@ public class HandTimerController : MonoBehaviour
                     timeRemaining = 0;
                 }
                 UpdateTimerUI();
+                if (timeRemaining - 15 % 15 == 0)
+                    GameKitchenModeManager.Instance.Score += 10;
             }
             else
             {
@@ -70,7 +73,7 @@ public class HandTimerController : MonoBehaviour
 
     void CheckScene(string sceneName)
     {
-        if (sceneName == "Kitchen")
+        if (sceneName == "Kitchen" && GameKitchenModeManager.Instance.CurrentGameMode == GameKitchenModeManager.GameMode.Playing)
         {
             ResetTimer();
             canvas.enabled = true;
@@ -108,5 +111,8 @@ public class HandTimerController : MonoBehaviour
         timeRemaining = 0;
         UpdateTimerUI();
         timerText.color = Color.red;
+
+        SceneController.SwitchScene("Kitchen");
+        GameKitchenModeManager.Instance.SetGameMode(GameKitchenModeManager.GameMode.Start);
     }
 }

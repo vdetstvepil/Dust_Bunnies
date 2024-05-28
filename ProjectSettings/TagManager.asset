@@ -13,6 +13,7 @@ TagManager:
   - Fan
   - Live
   - Enemy
+  - Bunny
   layers:
   - Default
   - TransparentFX
