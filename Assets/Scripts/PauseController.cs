@@ -46,7 +46,7 @@ public class PauseController : MonoBehaviour
         if (menuAction.stateDown)
         {
             if (SceneManager.GetActiveScene().name == "Start"
-                || SceneManager.GetActiveScene().name == "Enter")
+                || SceneManager.GetActiveScene().name == "Hall")
                 return;
 
             pauseCanvas.SetActive(true);
@@ -138,7 +138,7 @@ public class PauseController : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseCanvas.SetActive(false);
-        SceneController.SwitchScene("Enter");
+        SceneController.SwitchScene("Hall");
 
     }
 }
