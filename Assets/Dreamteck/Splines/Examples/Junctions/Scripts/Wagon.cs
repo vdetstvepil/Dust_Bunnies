@@ -85,7 +85,7 @@ namespace Dreamteck.Splines.Examples
         }
 
         SplineTracer tracer;
-        public bool isEngine = false;
+        public bool isEngine = true;
         public Wagon back;
         public float offset = 0f;
         Wagon front;
