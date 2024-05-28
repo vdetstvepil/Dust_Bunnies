@@ -3473,15 +3473,7 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4370892758258537153, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
-      propertyPath: maxWindForce
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4370892758258537153, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
       propertyPath: maxStartSpeed
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4370892758258537153, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
-      propertyPath: maxSpeedModifier
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4370892758258537153, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
@@ -3492,14 +3484,6 @@ PrefabInstance:
       propertyPath: windParticlesRight
       value: 
       objectReference: {fileID: 1956737255}
-    - target: {fileID: 4370892758258537153, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
-      propertyPath: grabPinchLeftAction.actionPath
-      value: /actions/default/in/SqueezeLeft
-      objectReference: {fileID: 0}
-    - target: {fileID: 4370892758258537153, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
-      propertyPath: grabPinchRightAction.actionPath
-      value: /actions/default/in/SqueezeRight
-      objectReference: {fileID: 0}
     - target: {fileID: 4370892758258537153, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
       propertyPath: grabPinchLeftForceAction.actionPath
       value: /actions/default/in/SqueezeLeft
@@ -3568,6 +3552,8 @@ PrefabInstance:
     m_RemovedGameObjects:
     - {fileID: 2920479760678184630, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
     - {fileID: 617653461123423948, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
+    - {fileID: 3007327519577116555, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
+    - {fileID: 3976471432552013682, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8668556034102983968, guid: ff2e2c9be3fee834c8dabd5edfa329a4, type: 3}
       insertIndex: 1
