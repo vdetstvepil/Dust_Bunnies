@@ -9,13 +9,16 @@ public class HandTimerController : MonoBehaviour
     public TextMeshProUGUI timerText;   // Текст для отображения времени
     public Canvas canvas;    // Canvas, который будет отображаться или скрываться
     public float totalTime = 90f; // Полторы минуты
+    public GameObject[] lives; // Массив жизней (иконок)
     private float timeRemaining;
     private bool isTimeUp = false;
+    private int currentLives;
     private string currentSceneName;
 
     void Start()
     {
         timeRemaining = totalTime;
+        currentLives = lives.Length; // Изначально количество жизней равно длине массива
         UpdateTimerText();
         Scene currentScene = SceneManager.GetActiveScene();
         currentSceneName = currentScene.name;
@@ -82,7 +85,28 @@ public class HandTimerController : MonoBehaviour
     {
         timeRemaining = totalTime;
         isTimeUp = false;
-        timerText.color = Color.black; // Или любой другой начальный цвет
+        timerText.color = new Color32(101, 36, 129, 255);
         UpdateTimerUI();
+    }
+
+    public void LoseLife()
+    {
+        if (currentLives > 0)
+        {
+            currentLives--;
+            lives[currentLives].SetActive(false); // Делаем иконку невидимой
+            if (currentLives == 0)
+            {
+                StopTimer();
+            }
+        }
+    }
+
+    void StopTimer()
+    {
+        isTimeUp = true;
+        timeRemaining = 0;
+        UpdateTimerUI();
+        timerText.color = Color.red;
     }
 }
