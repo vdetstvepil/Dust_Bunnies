@@ -7,27 +7,40 @@ public class SceneKitchenSetup : MonoBehaviour
     public Canvas GameCanvas;
     public GameObject StartPanel;
     public GameObject GameOverPanel;
+    public GameObject Room;
 
     void Start()
     {
-        GameKitchenModeManager.GameMode currentMode = GameKitchenModeManager.Instance.CurrentGameMode;
+        GameKitchenModeData.GameMode currentMode = GameKitchenModeData.CurrentGameMode;
+        
+        if (GameKitchenModeData.CurrentGameMode == GameKitchenModeData.GameMode.Playing)
+        {
+            ((HeadTimerController)FindObjectOfType<HeadTimerController>()).canvas.enabled = true;
+            ((HeadTimerController)FindObjectOfType<HeadTimerController>()).ResetTimer();
+        }
+        else
+        {
+            ((HeadTimerController)FindObjectOfType<HeadTimerController>()).canvas.enabled = false;
+        }
 
         switch (currentMode)
         {
-            case GameKitchenModeManager.GameMode.Start:
+            case GameKitchenModeData.GameMode.Start:
                 EnableGameCanvas();
                 EnableStartPanel();
                 DisableEnemiesAndBunny();
+                Room.transform.localScale = Vector3.one;
                 break;
 
-            case GameKitchenModeManager.GameMode.Playing:
-                GameKitchenModeManager.Instance.Score = 0;
+            case GameKitchenModeData.GameMode.Playing:
+                GameKitchenModeData.Score = 0;
                 break;
 
-            case GameKitchenModeManager.GameMode.GameOver:
+            case GameKitchenModeData.GameMode.GameOver:
                 EnableGameCanvas();
                 EnableGameOverPanel();
                 DisableEnemiesAndBunny();
+                Room.transform.localScale = Vector3.one;
                 break;
         }
 
@@ -76,8 +89,8 @@ public class SceneKitchenSetup : MonoBehaviour
 
     public void BeginGame()
     {
+        GameKitchenModeData.CurrentGameMode = GameKitchenModeData.GameMode.Playing;
         SceneController.SwitchScene("Kitchen");
-        GameKitchenModeManager.Instance.SetGameMode(GameKitchenModeManager.GameMode.Playing);
     }
 
 

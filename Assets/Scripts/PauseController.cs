@@ -133,7 +133,7 @@ public class PauseController : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Kitchen")
         {
             SceneController.SwitchScene("Kitchen");
-            GameKitchenModeManager.Instance.SetGameMode(GameKitchenModeManager.GameMode.Start);
+            GameKitchenModeData.CurrentGameMode = GameKitchenModeData.GameMode.Start;
         }
         else SceneController.SwitchScene(SceneManager.GetActiveScene().name);
     }
