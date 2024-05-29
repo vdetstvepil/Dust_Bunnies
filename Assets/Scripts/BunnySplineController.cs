@@ -6,8 +6,6 @@ using UnityEngine;
 public class BunnySplineController : MonoBehaviour
 {
     private SplineFollower splineFollower;
-    [SerializeField] private GameObject bunny;
-
 
     // Start is called before the first frame update
     void Start()
@@ -18,12 +16,12 @@ public class BunnySplineController : MonoBehaviour
 
     public void ChekingBunnyPosition(Vector3 objectPosition)
     {
-        float minX = 5.0f;
-        float maxX = 10.0f;
-        float minY = 2.0f;
-        float maxY = 8.0f;
-        float minZ = -3.0f;
-        float maxZ = 3.0f;
+        float minX = -4.5f;
+        float maxX = -5.5f;
+        float minY = 0.0f;
+        float maxY = -1.0f;
+        float minZ = 11.0f; 
+        float maxZ = 12.0f;
         if (objectPosition.x >= minX && objectPosition.x <= maxX &&
             objectPosition.y >= minY && objectPosition.y <= maxY &&
             objectPosition.z >= minZ && objectPosition.z <= maxZ)
