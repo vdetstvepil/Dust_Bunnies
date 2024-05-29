@@ -13,6 +13,8 @@ TagManager:
   - Fan
   - Live
   - Enemy
+  - Bunny
+  - Score
   layers:
   - Default
   - TransparentFX

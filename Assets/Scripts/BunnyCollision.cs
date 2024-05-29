@@ -1,28 +1,30 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class BunnyCollision : MonoBehaviour
 {
-    private HandTimerController timerController; // Ссылка на контроллер таймера
+    private HeadTimerController timerController; // Ссылка на контроллер таймера
 
     void Start()
     {
         // Находим контроллер таймера в сцене
-        timerController = FindObjectOfType<HandTimerController>();
-        if (timerController == null)
-        {
-            Debug.LogError("HandTimerController не найден в сцене!");
-        }
-        Debug.Log("Hand found");
+        timerController = FindObjectOfType<HeadTimerController>();
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        // Проверяем столкновение с объектом, имеющим тег "Enemy"
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (SceneManager.GetActiveScene().name == "Kitchen")
         {
-            // Уменьшаем жизнь в HandTimerController
-            timerController.LoseLife();
-            Debug.Log("-life");
+            // Проверяем столкновение с объектом, имеющим тег "Enemy"
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                // Уменьшаем жизнь в HandTimerController
+                timerController.LoseLife();
+            }
+            if (collision.gameObject.CompareTag("Score"))
+            {
+                timerController.AddScore(100);
+            }
         }
     }
 }
