@@ -11,6 +11,8 @@ TagManager:
   - Vehicle
   - HandsVR
   - Fan
+  - Live
+  - Enemy
   layers:
   - Default
   - TransparentFX
