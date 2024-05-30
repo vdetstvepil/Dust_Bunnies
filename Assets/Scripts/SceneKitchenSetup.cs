@@ -8,6 +8,7 @@ public class SceneKitchenSetup : MonoBehaviour
     public GameObject StartPanel;
     public GameObject GameOverPanel;
     public GameObject Room;
+    public TMPro.TextMeshProUGUI ScoreText;
 
     void Start()
     {
@@ -48,6 +49,7 @@ public class SceneKitchenSetup : MonoBehaviour
                 EnableGameOverPanel();
                 DisableEnemiesAndBunny();
                 Room.transform.localScale = Vector3.one;
+                ScoreText.text = GameKitchenModeData.Score.ToString();
                 break;
         }
 
