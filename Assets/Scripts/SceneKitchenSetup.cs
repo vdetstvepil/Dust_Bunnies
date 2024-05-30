@@ -18,7 +18,7 @@ public class SceneKitchenSetup : MonoBehaviour
         {
             Debug.Log("checkpoint2");
             GameObject spawnSystem = GameObject.Find("SpawnSystem");
-            spawnSystem.GetComponent<SpawnSystemController>().enabled = true;
+            spawnSystem.GetComponent<SpawnAndDieSystemController>().enabled = true;
 
             ((HeadTimerController)FindObjectOfType<HeadTimerController>()).canvas.enabled = true;
             ((HeadTimerController)FindObjectOfType<HeadTimerController>()).ResetTimer();
@@ -28,7 +28,7 @@ public class SceneKitchenSetup : MonoBehaviour
         {
             ((HeadTimerController)FindObjectOfType<HeadTimerController>()).canvas.enabled = false;
             GameObject spawnSystem = GameObject.Find("SpawnSystem");
-            spawnSystem.GetComponent<SpawnSystemController>().enabled = false;
+            spawnSystem.GetComponent<SpawnAndDieSystemController>().enabled = false;
         }
 
         switch (currentMode)

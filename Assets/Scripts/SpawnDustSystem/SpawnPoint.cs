@@ -15,8 +15,18 @@ public class SpawnPoint : MonoBehaviour
             GameObject dustPrefab = dustPrefabs[randomIndex];
             Vector3 spawnPosition = transform.position + Vector3.up * spawnHeight;
             GameObject spawnedDustPrefab = Instantiate(dustPrefab, spawnPosition, transform.rotation);
+        }
+    }
+
+    public void SpawnAndDie()
+    {
+        if (dustPrefabs.Length > 0)
+        {
+            int randomIndex = Random.Range(0, dustPrefabs.Length);
+            GameObject dustPrefab = dustPrefabs[randomIndex];
+            Vector3 spawnPosition = transform.position + Vector3.up * spawnHeight;
+            GameObject spawnedDustPrefab = Instantiate(dustPrefab, spawnPosition, transform.rotation);
             Destroy(spawnedDustPrefab, 20f);
-            Debug.Log("Spawned dust prefab: " + spawnedDustPrefab.name);
         }
     }
 }
