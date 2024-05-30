@@ -24,6 +24,7 @@ public class BunnyCollision : MonoBehaviour
             if (collision.gameObject.CompareTag("Score"))
             {
                 timerController.AddScore(100);
+                Destroy(collision.gameObject);
             }
         }
     }
