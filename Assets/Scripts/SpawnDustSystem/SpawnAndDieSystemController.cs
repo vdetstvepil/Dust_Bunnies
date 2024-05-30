@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SpawnSystemController : MonoBehaviour
+public class SpawnAndDieSystemController : MonoBehaviour
 {
     public float spawnInterval = 10f;
 
@@ -36,7 +36,7 @@ public class SpawnSystemController : MonoBehaviour
         if (spawnPoints.Length > 0)
         {
             int randomIndex = Random.Range(0, spawnPoints.Length);
-            spawnPoints[randomIndex].Spawn();
+            spawnPoints[randomIndex].SpawnAndDie();
         }
     }
 }

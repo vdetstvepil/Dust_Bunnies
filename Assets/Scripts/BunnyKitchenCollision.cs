@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class BunnyCollision : MonoBehaviour
+public class BunnyKitchenCollision : MonoBehaviour
 {
     private HeadTimerController timerController; // Ссылка на контроллер таймера
 
