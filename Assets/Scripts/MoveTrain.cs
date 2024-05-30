@@ -8,7 +8,7 @@ public class MoveTrain : MonoBehaviour
     private SplineFollower splineFollower;
     [SerializeField] private GameObject gameObject;
     private ParticleSystem particleSystem;
-    public Animator animator;
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {

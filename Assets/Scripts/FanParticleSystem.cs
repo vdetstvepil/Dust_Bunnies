@@ -9,6 +9,7 @@ public class FanParticleSystem : MonoBehaviour
     void Start()
     {
         particleSystem = GetComponent<ParticleSystem>();
+        particleSystem.Stop();
     }
     public void OnOff()
     {
