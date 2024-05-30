@@ -15,6 +15,7 @@ TagManager:
   - Enemy
   - Bunny
   - Score
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

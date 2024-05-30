@@ -12,15 +12,22 @@ public class SceneKitchenSetup : MonoBehaviour
     void Start()
     {
         GameKitchenModeData.GameMode currentMode = GameKitchenModeData.CurrentGameMode;
-        
+        Debug.Log("checkpoint1");
         if (GameKitchenModeData.CurrentGameMode == GameKitchenModeData.GameMode.Playing)
         {
+            Debug.Log("checkpoint2");
+            GameObject spawnSystem = GameObject.Find("SpawnSystem");
+            spawnSystem.GetComponent<SpawnSystemController>().enabled = true;
+
             ((HeadTimerController)FindObjectOfType<HeadTimerController>()).canvas.enabled = true;
             ((HeadTimerController)FindObjectOfType<HeadTimerController>()).ResetTimer();
+
         }
         else
         {
             ((HeadTimerController)FindObjectOfType<HeadTimerController>()).canvas.enabled = false;
+            GameObject spawnSystem = GameObject.Find("SpawnSystem");
+            spawnSystem.GetComponent<SpawnSystemController>().enabled = false;
         }
 
         switch (currentMode)
