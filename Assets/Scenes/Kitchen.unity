@@ -12518,6 +12518,7 @@ MonoBehaviour:
   StartPanel: {fileID: 1380030902}
   GameOverPanel: {fileID: 605423119}
   Room: {fileID: 665723636}
+  ScoreText: {fileID: 639854582}
 --- !u!1 &1668566758
 GameObject:
   m_ObjectHideFlags: 0
