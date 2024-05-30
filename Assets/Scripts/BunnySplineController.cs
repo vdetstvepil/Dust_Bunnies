@@ -6,24 +6,26 @@ using UnityEngine;
 public class BunnySplineController : MonoBehaviour
 {
     private SplineFollower splineFollower;
-    [SerializeField] private GameObject bunny;
-
+    [SerializeField] float minX;
+    [SerializeField] float maxX;
+    [SerializeField] float minY;
+    [SerializeField] float maxY;
+    [SerializeField] float minZ;
+    [SerializeField] float maxZ;
+    Vector3 objectPosition;
 
     // Start is called before the first frame update
     void Start()
     {
         splineFollower = GetComponent<SplineFollower>(); 
-        Vector3 objectPosition = transform.position;
     }
 
-    public void ChekingBunnyPosition(Vector3 objectPosition)
+    private void Update()
     {
-        float minX = 5.0f;
-        float maxX = 10.0f;
-        float minY = 2.0f;
-        float maxY = 8.0f;
-        float minZ = -3.0f;
-        float maxZ = 3.0f;
+        objectPosition = transform.position;
+    }
+    public void ChekingBunnyPosition()
+    {
         if (objectPosition.x >= minX && objectPosition.x <= maxX &&
             objectPosition.y >= minY && objectPosition.y <= maxY &&
             objectPosition.z >= minZ && objectPosition.z <= maxZ)
@@ -37,6 +39,13 @@ public class BunnySplineController : MonoBehaviour
         if (splineFollower != null)
         {
             splineFollower.enabled = true;
+        }
+    }
+    public void SplineControllerOff()
+    {
+        if (splineFollower != null)
+        {
+            splineFollower.enabled = false;
         }
     }
 }

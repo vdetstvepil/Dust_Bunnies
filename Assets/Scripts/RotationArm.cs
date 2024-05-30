@@ -1,9 +1,8 @@
-using Dreamteck.Splines;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class KachelyController : MonoBehaviour
+public class RotationArm : MonoBehaviour
 {
     private Animator animator;
     // Start is called before the first frame update
@@ -12,12 +11,13 @@ public class KachelyController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    public void ToughtButtonKachely()
+    public void ToughtArm()
     {
         if (animator != null)
         {
             animator.enabled = true;
-            animator.Play("rotation_kachel");
+            animator.Play("rotation_train_button");
         }
     }
+
 }

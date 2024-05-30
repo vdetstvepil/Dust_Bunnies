@@ -17,7 +17,7 @@ public class CarMoving : MonoBehaviour
 
     public void CarMove()
     {
-        if (animator != null)
+        if (animator != null || splineFollower != null)
         {
             animator.enabled = true;
             animator.Play("rotation wheel");
