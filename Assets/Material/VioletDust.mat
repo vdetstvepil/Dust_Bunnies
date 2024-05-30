@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 20 Example
+  m_Name: VioletDust
   m_Shader: {fileID: 4800000, guid: 3feaf2257ce089a4b8f3dcb51f9357eb, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -144,7 +144,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
-    - _FurColor: {r: 0.3721527, g: 0.3721527, b: 0.3721527, a: 1}
+    - _FurColor: {r: 0.27095318, g: 0, b: 1, a: 1}
     - _FurEmmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FurLayerFadeEnd: {r: 1, g: 1, b: 1, a: 1}
     - _FurLayerFadeStart: {r: 0, g: 0, b: 0, a: 1}
