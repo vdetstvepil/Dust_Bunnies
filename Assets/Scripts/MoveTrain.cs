@@ -31,11 +31,18 @@ public class MoveTrain : MonoBehaviour
         { 
             animator.enabled = true;
             animator.Play("condey_on");
-        }
 
-        if (particleSystem != null)
-        {
-            particleSystem.Play();
+            GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+
+            foreach (GameObject obj in allObjects)
+            {
+                if (obj.name == "ACWind")
+                {
+                    // Включаем объект
+                    obj.SetActive(true);
+                    break;
+                }
+            }
         }
     }
 }

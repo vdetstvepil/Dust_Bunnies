@@ -4038,7 +4038,7 @@ MonoBehaviour:
   scoreRing: {fileID: 1984892246}
   scoreText: {fileID: 1107331559}
   canvas: {fileID: 1984892247}
-  maximumScore: 1
+  maximumScore: 8
   score: 0
 --- !u!1 &1996921803
 GameObject:
