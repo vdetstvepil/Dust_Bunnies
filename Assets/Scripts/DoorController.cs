@@ -1,17 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Valve.VR;
-
 
 public class DoorController : MonoBehaviour
 {
     public string chosenDoor;
 
     private Animator animator;
-   
+
 
     private void Start()
     {
@@ -34,6 +32,7 @@ public class DoorController : MonoBehaviour
         switch (chosenDoor)
         {
             case "Kitchen":
+                GameKitchenModeData.CurrentGameMode = GameKitchenModeData.GameMode.Start;
                 SceneController.SwitchScene("Kitchen");
                 break;
             case "LivingRoom":
@@ -43,6 +42,5 @@ public class DoorController : MonoBehaviour
                 SceneController.SwitchScene("KidRoom");
                 break;
         }
-        
     }
 }

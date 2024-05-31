@@ -30,11 +30,11 @@ public class BunnySplineController : MonoBehaviour
             objectPosition.y >= minY && objectPosition.y <= maxY &&
             objectPosition.z >= minZ && objectPosition.z <= maxZ)
         {
-            ToughtButtonKachely();
+            MoveBunny();
         }
     }
 
-    public void ToughtButtonKachely()
+    public void MoveBunny()
     {
         if (splineFollower != null)
         {

@@ -2,21 +2,32 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: 20 Example
   m_Shader: {fileID: 4800000, guid: 3feaf2257ce089a4b8f3dcb51f9357eb, type: 3}
-  m_ShaderKeywords: _FURHEIGHTCUTOFF_ON _FURLAYERFADE_ON _FURLIGHTINGAMBIENT_ON _FURLIGHTINGDIRECTIONAL_ON
-    _FURLIGHTING_ON _FURTEXTUREOFFSET_ON _FURUVBRUSH_ON _FURWIND_ON
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _FURHEIGHTCUTOFF_ON
+  - _FURLAYERFADE_ON
+  - _FURLIGHTINGAMBIENT_ON
+  - _FURLIGHTINGDIRECTIONAL_ON
+  - _FURLIGHTING_ON
+  - _FURTEXTUREOFFSET_ON
+  - _FURUVBRUSH_ON
+  - _FURWIND_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -60,6 +71,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: c40f343d86c4899428c8cdedba64c92d, type: 3}
         m_Scale: {x: 50, y: 50}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _ColorWriteMask: 15
     - _Cull: 0
@@ -79,6 +91,7 @@ Material:
     - _FurHeightCutoffChangeBase: 0
     - _FurHeightCutoffEnd: 0.85
     - _FurHeightCutoffStart: 0
+    - _FurInset: 0
     - _FurLayerFade: 1
     - _FurLayerFadeChangeBase: 0
     - _FurLayers: 1
@@ -109,9 +122,9 @@ Material:
     - _FurUVWindStrengthX: 0
     - _FurUVWindStrengthY: 0
     - _FurWind: 1
-    - _FurWindSpeedX: 0.5
-    - _FurWindSpeedY: 0.75
-    - _FurWindSpeedZ: 1
+    - _FurWindSpeedX: 2
+    - _FurWindSpeedY: 2
+    - _FurWindSpeedZ: 2
     - _FurWindStrengthX: 0.15
     - _FurWindStrengthY: 0.15
     - _FurWindStrengthZ: 0.15
@@ -131,7 +144,7 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Emission: {r: 0, g: 0, b: 0, a: 0}
-    - _FurColor: {r: 1.2311444, g: 1.2311444, b: 1.2311444, a: 1}
+    - _FurColor: {r: 0.3721527, g: 0.3721527, b: 0.3721527, a: 1}
     - _FurEmmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _FurLayerFadeEnd: {r: 1, g: 1, b: 1, a: 1}
     - _FurLayerFadeStart: {r: 0, g: 0, b: 0, a: 1}

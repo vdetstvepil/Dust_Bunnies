@@ -57,4 +57,11 @@ public class SceneController : MonoBehaviour
             return instance;
         }
     }
+
+    public void LoadSceneWithMode(string sceneName, GameKitchenModeData.GameMode mode)
+    {
+        GameKitchenModeData.CurrentGameMode = mode;
+
+        SwitchScene(sceneName);
+    }
 }
