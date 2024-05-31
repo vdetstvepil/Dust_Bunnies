@@ -41,6 +41,9 @@ public class DoorController : MonoBehaviour
             case "KidRoom":
                 SceneController.SwitchScene("KidRoom");
                 break;
+            case "Start":
+                SceneController.SwitchScene("Start");
+                break;
         }
     }
 }

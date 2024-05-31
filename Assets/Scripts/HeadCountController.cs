@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.SocialPlatforms.Impl;
+using Valve.VR.InteractionSystem;
 
 public class HeadCountController : MonoBehaviour
 {
@@ -59,5 +60,20 @@ public class HeadCountController : MonoBehaviour
     {
         score += 1;
         UpdateScoreUI();
+
+        if (score >= maximumScore)
+        {
+            GameObject exitDoor = GameObject.Find("ExitDoor");
+            Interactable interactable = exitDoor.GetComponent<Interactable>();
+            interactable.enabled = true;
+
+            GameObject.Find("ExitSign").GetComponent<Image>().enabled = true;
+            GameObject.Find("ExitArrow").GetComponent<Image>().enabled = true;
+        }
+    }
+
+    public void Finish()
+    {
+        SceneController.SwitchScene("Hall");
     }
 }
