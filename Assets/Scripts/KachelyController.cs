@@ -16,6 +16,7 @@ public class KachelyController : MonoBehaviour
     {
         if (animator != null)
         {
+            animator.enabled = false;
             animator.enabled = true;
             animator.Play("rotation_kachel");
         }
